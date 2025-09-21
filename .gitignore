@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+flowsc/
+
+
+# VS Code
+.vscode/
+
+# Build
+build/
+dist/
+*.egg-info/
+*.eggs/
+
