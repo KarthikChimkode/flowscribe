@@ -6,6 +6,7 @@ class OllamaService:
         self.url = f"{host}/api/generate"
 
     def generate(self, model: str, prompt: str, temperature: float = 0.7, max_tokens: int = 512) -> str:
+        
         payload = {
             "model": model,
             "prompt": prompt,
@@ -13,6 +14,8 @@ class OllamaService:
             "max_tokens": max_tokens,
             "stream": True
         }
+   
+        
 
         combined_response = ""
         with requests.post(self.url, json=payload, stream=True) as response:
@@ -33,7 +36,8 @@ class OllamaService:
                             combined_response += json_obj["response"]
                     except json.JSONDecodeError:
                         continue  # skip invalid lines
-
+        print("Prompt sent to Ollama:", prompt)
+        print("Combined response from Ollama:", combined_response)
         return combined_response
 
 if __name__ == "__main__":

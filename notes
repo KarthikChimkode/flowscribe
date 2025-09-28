@@ -1,0 +1,7 @@
+backend
+main.py for redis and websocket is setup and ollama client service is setup but runs when ran files
+frontend no changes
+
+
+today backend tests is running good ollama is responding for prompt needs more fintuing for proper just suggesting code snippet
+ frontend not started 
