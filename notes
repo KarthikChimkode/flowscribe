@@ -3,5 +3,12 @@ main.py for redis and websocket is setup and ollama client service is setup but 
 frontend no changes
 
 
-today backend tests is running good ollama is responding for prompt needs more fintuing for proper just suggesting code snippet
+today backend tests is running good ollama is responding for prompt needs more finetuing for proper just suggesting code snippet
  frontend not started 
+
+ imporvements needed 
+ -- should need create tools for seperate tasks like 
+ -- code completion one tasks
+ -- summarize the code if asked
+ -- and solve error
+ -- **** Dockerize everything should run all in one click
