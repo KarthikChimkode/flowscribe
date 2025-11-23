@@ -5,6 +5,8 @@ frontend no changes
 
 today backend tests is running good ollama is responding for prompt needs more finetuing for proper just suggesting code snippet
  frontend not started 
+  $env:OLLAMA_HOST = "0.0.0.0:11434"
+PS C:\Users\karth> ollama serve
 
  imporvements needed 
  -- should need create tools for seperate tasks like 
