@@ -2,7 +2,7 @@ import requests
 import json
 
 class OllamaService:
-    def __init__(self, host='http://localhost:11434'):
+    def __init__(self, host='http://127.0.0.1:11434'):
         self.url = f"{host}/api/generate"
 
     def generate(self, model: str, prompt: str, temperature: float = 0.7, max_tokens: int = 512) -> str:
