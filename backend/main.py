@@ -1,6 +1,8 @@
 from fastapi import FastAPI, WebSocket
 import redis.asyncio as redis
 from ws.editor_ws import editor_websocket
+from fastapi import FastAPI
+from database.init_db import init_db
 
 app = FastAPI(title="FlowScribe")
 
@@ -15,3 +17,7 @@ async def shutdown_event():
 @app.websocket("/ws/editor")
 async def editor_ws(websocket: WebSocket):
     await editor_websocket(websocket, app.state.redis)
+
+@app.on_event("startup")
+async def startup():
+    await init_db()

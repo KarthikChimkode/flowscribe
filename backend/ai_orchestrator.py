@@ -2,8 +2,11 @@ import json
 from ollama_service import OllamaService
 import asyncio
 
+from database.db import AsyncSessionLocal
+from database.models import CodeSnippet
+
 class AIOrchestrator:
-    def __init__(self, model: str = "codellama:7b"):
+    def __init__(self, model: str = "mistral:latest"):
         self.client = OllamaService()
         self.model = model
 
@@ -28,4 +31,16 @@ class AIOrchestrator:
             "suggestion": response.strip()
         }
 
+        await self.save_to_db(code_snippet, response.strip())
+
         return json.dumps(structured)
+    
+    async def save_to_db(self, code: str, ai_suggestion: str):
+        async with AsyncSessionLocal() as session:
+            snippet = CodeSnippet(
+                code = code,
+                ai_suggestion = ai_suggestion
+            )
+
+            session.add(snippet)
+            await session.commit()
