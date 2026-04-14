@@ -1,14 +1,13 @@
 import json
 from ollama_service import OllamaService
 import asyncio
-
+from llm.factory import LLMFactory
 from database.db import AsyncSessionLocal
 from database.models import CodeSnippet
 
 class AIOrchestrator:
-    def __init__(self, model: str = "mistral:latest"):
-        self.client = OllamaService()
-        self.model = model
+    def __init__(self):
+      self.provider = LLMFactory.get_provider()
 
     async def handle_code_completion(self, code_snippet: str) -> str:
         prompt = f"""You are an AI coding assistant. The user wrote the following code:
@@ -21,9 +20,7 @@ class AIOrchestrator:
         3. Provide a corrected/optimized version if needed.
         """
         # FIX: Run sync code in a thread
-        response = await asyncio.to_thread(
-            self.client.generate, self.model, prompt
-        )
+        response = await self.provider.generate(prompt)
 
         structured = {
             "type": "ai_suggestion",

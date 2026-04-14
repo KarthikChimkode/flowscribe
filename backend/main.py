@@ -3,12 +3,13 @@ import redis.asyncio as redis
 from ws.editor_ws import editor_websocket
 from fastapi import FastAPI
 from database.init_db import init_db
+from config.config import settings
 
 app = FastAPI(title="FlowScribe")
 
 @app.on_event("startup")
 async def startup_event():
-    app.state.redis = await redis.from_url("redis://localhost:6379", decode_responses=True)
+    app.state.redis = await redis.from_url(settings.REDIS_URL, decode_responses=True)
 
 @app.on_event("shutdown")
 async def shutdown_event():
